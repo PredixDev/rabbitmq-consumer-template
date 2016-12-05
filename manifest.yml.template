@@ -1,0 +1,10 @@
+---
+applications:
+  - name: template-rabbitmq-consumer-template
+    buildpack: java_buildpack
+    path: target/rabbitmq-consumer-template-2.0.6.jar
+    services:
+        - ${rabbitMQService}
+env:
+    mainQueue: SampleMainQ
+    sampleErrorQueue: SampleErrorQ

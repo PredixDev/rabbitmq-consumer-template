@@ -1,0 +1,73 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xsi:schemaLocation="http://www.springframework.org/schema/rabbit
+           http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/oxm
+           http://www.springframework.org/schema/oxm/spring-oxm.xsd">
+
+	<!-- read the queue name properties from an external file -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:Test-rabbitmq.properties</value>
+		</property>
+	</bean>
+
+	<oxm:jaxb2-marshaller id="xmlmarshaller">
+		<oxm:class-to-be-bound
+			name="com.ge.predix.solsvc.consumersample.handler.SampleCustomObject" />
+	</oxm:jaxb2-marshaller>
+
+	<bean id="myMessageConverter"
+		class="org.springframework.amqp.support.converter.ContentTypeDelegatingMessageConverter">
+		<property name="delegates">
+			<map>
+				<entry key="application/json" value-ref="jacksonMessageConverter" />
+				<entry key="application/xml" value-ref="xmlMessageConverter" />
+				<entry key="text/plain" value-ref="simpleMessageConverter" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="simpleMessageConverter"
+		class="org.springframework.amqp.support.converter.SimpleMessageConverter" />
+
+	<oxm:jaxb2-marshaller id="xmlmarshaller">
+		<oxm:class-to-be-bound
+			name="com.ge.predix.solsvc.consumersample.handler.SampleCustomObject" />
+	</oxm:jaxb2-marshaller>
+
+	<bean id="xmlMessageConverter"
+		class="org.springframework.amqp.support.converter.MarshallingMessageConverter">
+		<constructor-arg index="0" ref="xmlmarshaller" />
+	</bean>
+
+	<bean id="jacksonMessageConverter"
+		class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter">
+		<property name="classMapper">
+			<bean class="org.springframework.amqp.support.converter.DefaultClassMapper">
+				<property name="defaultType"
+					value="com.ge.predix.solsvc.consumersample.handler.SampleCustomObject" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="myHandler"
+		class="com.ge.predix.solsvc.consumersample.handler.SampleCustomMessageHandler">
+	</bean>
+	<bean id="sampleSvc"
+		class="com.ge.predix.solsvc.consumersample.service.SampleCustomService" />
+
+	<rabbit:connection-factory id="myConnectionFactory"
+		addresses="${rabbitMQ.host}:${rabbitMQ.port}" />
+	<rabbit:admin connection-factory="myConnectionFactory" />
+
+	<rabbit:template id="myTemplate" connection-factory="myConnectionFactory"
+		message-converter="myMessageConverter" />
+
+</beans>
