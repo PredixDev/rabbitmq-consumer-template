@@ -1,0 +1,4 @@
+com.ge.predix.solsvc.consumersample.boot
+com.ge.predix.solsvc.consumersample.handler
+com.ge.predix.solsvc.consumersample.service
+com.ge.predix.solsvc.consumersample.util
