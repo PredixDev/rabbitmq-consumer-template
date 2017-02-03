@@ -2,7 +2,7 @@
 applications:
   - name: template-rabbitmq-consumer-template
     buildpack: java_buildpack
-    path: target/rabbitmq-consumer-template-2.0.8.jar
+    path: target/rabbitmq-consumer-template-2.0.9.jar
     services:
         - ${rabbitMQService}
 env:
