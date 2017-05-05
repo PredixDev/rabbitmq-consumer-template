@@ -2,7 +2,7 @@
 applications:
   - name: integration-rabbitmq-template
     buildpack: java_buildpack
-    path: target/rabbitmq-consumer-template-2.0.9.jar
+    path: target/rabbitmq-consumer-template-2.0.15.jar
     services:
         - myRabbitMQInstance
 env:
