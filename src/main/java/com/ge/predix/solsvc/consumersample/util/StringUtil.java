@@ -40,6 +40,8 @@ public class StringUtil {
 	/**
 	 * @param enums
 	 *            -
+	 * @param <T>
+	 *            -
 	 * @return -
 	 */
 	public static <T extends Enum<T>> List<String> enumToString(List<T> enums) {
@@ -67,8 +69,7 @@ public class StringUtil {
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTimeZone(TimeZone.getTimeZone("GMT"));
 		cal.setTime(dateTime);
-		XMLGregorianCalendar xmLGregorianCalendar = f
-				.newXMLGregorianCalendar(cal);
+		XMLGregorianCalendar xmLGregorianCalendar = f.newXMLGregorianCalendar(cal);
 		return xmLGregorianCalendar;
 	}
 

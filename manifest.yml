@@ -1,10 +1,10 @@
 ---
 applications:
-  - name: integration-rabbitmq-template
+  - name: template-rabbitmq-consumer-template
     buildpack: java_buildpack
-    path: target/rabbitmq-consumer-template-2.0.17.jar
+    path: target/rabbitmq-consumer-template-2.0.21.jar
     services:
-        - myRabbitMQInstance
+        - ${rabbitMQService}
 env:
     mainQueue: SampleMainQ
     sampleErrorQueue: SampleErrorQ
