@@ -5,15 +5,11 @@
 
 	<groupId>com.ge.predix.solsvc</groupId>
 	<artifactId>rabbitmq-consumer-template</artifactId>
-	<version>2.0.28</version>
+	<version>2.0.29</version>
 
 	<properties>
 		<maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
 		<maven-surefire-plugin.version>2.16</maven-surefire-plugin.version>
-		<ext-interface.version>2.0.7</ext-interface.version>
-		<ext-model.version>2.0.7</ext-model.version>
-		<ext-util.version>2.0.7</ext-util.version>
-		<predix-rest-client.version>2.0.8</predix-rest-client.version>
 		<spring.version>4.1.6.RELEASE</spring.version>
 		<httpcomponents.version>4.5.2</httpcomponents.version>
 		<maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
